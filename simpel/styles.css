@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.alaa {
+  background-color: greenyellow;
+  font-weight: bold;
+}
+
+.draw {
+  position: fixed;
+  outline: none;
+}
