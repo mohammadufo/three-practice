@@ -14,7 +14,10 @@ const material = new THREE.MeshBasicMaterial({
   wireframe: true,
 })
 const mesh = new THREE.Mesh(geometry, material)
-mesh.position.z = -4
+// mesh.position.z = -4
+// mesh.position.y = 3
+// mesh.position.x = 2
+mesh.position.set(2, -1, 3)
 
 scene.add(mesh)
 
@@ -26,10 +29,14 @@ const sizes = {
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
 camera.position.z = 7
 camera.position.y = -2
-camera.position.x = 3
+camera.position.x = 1
+
+// camera.position.set(-1, -1, 3)
+
 scene.add(camera)
 
-console.log(mesh.position.distanceTo(camera.position))
+const axesHelper = new THREE.AxesHelper(4)
+scene.add(axesHelper)
 
 //* Renderer
 const renderer = new THREE.WebGLRenderer({
