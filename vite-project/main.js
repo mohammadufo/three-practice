@@ -20,6 +20,12 @@ window.addEventListener('resize', () => {
 
 //* Create geometry and material for the shape
 const geometry = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2)
+// const geometry = new THREE.BufferGeometry()
+// const verticesArray = new Float32Array([0, 0, 0, 0, 1, 0, 1, 0, 0])
+
+// const positionAttribute = new THREE.BufferAttribute(verticesArray, 3)
+// geometry.setAttribute('position', positionAttribute)
+
 const material = new THREE.MeshBasicMaterial({
   color: 'purple',
   wireframe: true,
