@@ -80,18 +80,24 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height)
 renderer.render(scene, camera)
 
-let time = Date.now()
+// let time = Date.now()
+
+//* Clock
+const clock = new THREE.Clock()
 
 //* Animation
 const tick = () => {
-  const currentTime = Date.now()
-  const deltaTime = currentTime - time
-  time = currentTime
+  // const currentTime = Date.now()
+  // const deltaTime = currentTime - time
+  // time = currentTime
+
+  const elapsedTime = clock.getElapsedTime()
 
   // console.log('tick')
   // group.rotation.x += 0.01
   // group.rotation.y += 0.03
-  group.rotation.y += 0.001 * deltaTime
+  group.rotation.x = Math.sin(elapsedTime)
+  group.rotation.y = Math.tan(elapsedTime)
   renderer.render(scene, camera)
   window.requestAnimationFrame(tick)
 }
