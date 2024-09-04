@@ -79,3 +79,21 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.render(scene, camera)
+
+let time = Date.now()
+
+//* Animation
+const tick = () => {
+  const currentTime = Date.now()
+  const deltaTime = currentTime - time
+  time = currentTime
+
+  // console.log('tick')
+  // group.rotation.x += 0.01
+  // group.rotation.y += 0.03
+  group.rotation.y += 0.001 * deltaTime
+  renderer.render(scene, camera)
+  window.requestAnimationFrame(tick)
+}
+
+tick()
