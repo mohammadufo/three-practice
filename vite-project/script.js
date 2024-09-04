@@ -1,6 +1,7 @@
 import './style.css'
 
 import * as THREE from 'three'
+import { gsap } from 'gsap'
 
 const canvas = document.querySelector('canvas.webgl')
 
@@ -86,6 +87,10 @@ renderer.render(scene, camera)
 const clock = new THREE.Clock()
 
 //* Animation
+
+gsap.to(group.position, { duration: 1, delay: 1, x: 2 })
+gsap.to(group.position, { duration: 1, delay: 1, x: 0 })
+
 const tick = () => {
   // const currentTime = Date.now()
   // const deltaTime = currentTime - time
@@ -96,8 +101,8 @@ const tick = () => {
   // console.log('tick')
   // group.rotation.x += 0.01
   // group.rotation.y += 0.03
-  group.rotation.x = Math.sin(elapsedTime)
-  group.rotation.y = Math.tan(elapsedTime)
+  // group.rotation.x = Math.sin(elapsedTime)
+  // group.rotation.y = Math.tan(elapsedTime)
   renderer.render(scene, camera)
   window.requestAnimationFrame(tick)
 }
