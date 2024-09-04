@@ -8,18 +8,51 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 
 //* Object
-const geometry = new THREE.BoxGeometry()
-const material = new THREE.MeshBasicMaterial({
-  color: 'red',
-  wireframe: true,
-})
-const mesh = new THREE.Mesh(geometry, material)
-// mesh.position.z = -4
-// mesh.position.y = 3
-// mesh.position.x = 2
-mesh.position.set(2, -1, 3)
+const group = new THREE.Group()
+scene.add(group)
 
-scene.add(mesh)
+const cube1 = new THREE.Mesh(
+  new THREE.BoxGeometry(1, 1, 1),
+  new THREE.MeshBasicMaterial({ color: 'purple', wireframe: true })
+)
+cube1.position.z = -2
+group.add(cube1)
+
+const cube2 = new THREE.Mesh(
+  new THREE.BoxGeometry(2, 1.5, 1),
+  new THREE.MeshBasicMaterial({ color: 'teal' })
+)
+cube2.position.x = 4
+cube2.position.y = 1
+group.add(cube2)
+
+const cube3 = new THREE.Mesh(
+  new THREE.BoxGeometry(3, 1, 2),
+  new THREE.MeshBasicMaterial({ color: 'green', wireframe: true })
+)
+cube3.position.y = 3
+cube3.position.x = 3
+group.add(cube3)
+
+group.position.x = 4
+
+// const geometry = new THREE.BoxGeometry()
+// const material = new THREE.MeshBasicMaterial({
+//   color: 'purple',
+//   //   wireframe: true,
+// })
+// const mesh = new THREE.Mesh(geometry, material)
+// // mesh.position.z = -4
+// // mesh.position.y = 3
+// // mesh.position.x = 2
+// mesh.position.set(2, -1, 3)
+// mesh.scale.set(2, 1, 3)
+// mesh.rotation.reorder('YXZ')
+// mesh.rotation.y = Math.PI - 1
+// mesh.rotation.x = 2
+// mesh.rotation.z = Math.PI
+
+// scene.add(mesh)
 
 //* Camera
 const sizes = {
@@ -27,9 +60,11 @@ const sizes = {
   height: window.innerHeight,
 }
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
-camera.position.z = 7
-camera.position.y = -2
-camera.position.x = 1
+camera.position.z = 10
+camera.position.y = 2
+// camera.position.x = 1
+
+// camera.lookAt(mesh.position)
 
 // camera.position.set(-1, -1, 3)
 
