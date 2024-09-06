@@ -60,13 +60,13 @@ const sizes = {
   width: window.innerWidth,
   height: window.innerHeight,
 }
-// const camera = new THREE.PerspectiveCamera(
-//   80,
-//   sizes.width / sizes.height,
-//   0.1,
-//   100
-// )
-const camera = new THREE.OrthographicCamera(10, -1, -10, 10, 1, 1000)
+const camera = new THREE.PerspectiveCamera(
+  80,
+  sizes.width / sizes.height,
+  0.1,
+  100
+)
+// const camera = new THREE.OrthographicCamera(10, -1, -10, 10, 1, 1000)
 camera.position.z = 10
 camera.position.y = 2
 // camera.position.x = 1
