@@ -21,7 +21,7 @@ const scene = new THREE.Scene()
 const geometry = new THREE.BoxGeometry(1, 1, 1)
 const material = new THREE.MeshBasicMaterial({
   color: 'red',
-  //   wireframe: true,
+  wireframe: true,
 })
 
 const cube = new THREE.Mesh(geometry, material)
@@ -71,8 +71,10 @@ const clock = new THREE.Clock()
 const tick = () => {
   const elapsedTime = clock.getElapsedTime()
 
-  camera.position.x = curser.x * 2
-  camera.position.y = curser.y * 2
+  camera.position.x = Math.sin(curser.x * Math.PI * 2) * 2
+  camera.position.z = Math.cos(curser.x * Math.PI * 2) * 2
+  camera.position.y = curser.y * 3
+  camera.lookAt(cube.position)
   renderer.render(scene, camera)
   window.requestAnimationFrame(tick)
 }
