@@ -1,6 +1,8 @@
 import './style.css'
 
 import * as THREE from 'three'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls'
 
 const canvas = document.querySelector('canvas.webgl')
 
@@ -56,8 +58,13 @@ camera.position.z = 5
 camera.lookAt(cube.position)
 scene.add(camera)
 
+//* Helper
 const axesHelper = new THREE.AxesHelper(3)
 scene.add(axesHelper)
+
+//* Controls
+const controls = new TrackballControls(camera, canvas)
+controls.enableDamping = true
 
 //* Renderer
 const renderer = new THREE.WebGLRenderer({
@@ -71,10 +78,14 @@ const clock = new THREE.Clock()
 const tick = () => {
   const elapsedTime = clock.getElapsedTime()
 
-  camera.position.x = Math.sin(curser.x * Math.PI * 2) * 2
-  camera.position.z = Math.cos(curser.x * Math.PI * 2) * 2
-  camera.position.y = curser.y * 3
-  camera.lookAt(cube.position)
+  //   camera.position.x = Math.sin(curser.x * Math.PI * 2) * 2
+  //   camera.position.z = Math.cos(curser.x * Math.PI * 2) * 2
+  //   camera.position.y = curser.y * 3
+  //   camera.lookAt(cube.position)
+
+  //? Update Controls
+  controls.update()
+
   renderer.render(scene, camera)
   window.requestAnimationFrame(tick)
 }
