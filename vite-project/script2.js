@@ -36,6 +36,20 @@ const sizes = {
   height: window.innerHeight,
 }
 
+window.addEventListener('resize', () => {
+  // ! update sizes
+  ;(sizes.width = window.innerWidth), (sizes.height = window.innerHeight)
+
+  //! update camera
+  camera.aspect = sizes.width / sizes.height
+
+  //! update Matrix
+  camera.updateProjectionMatrix()
+
+  //! update Renderer sizes
+  renderer.setSize(sizes.width, sizes.height)
+})
+
 const aspectRatio = sizes.width / sizes.height
 
 const camera = new THREE.PerspectiveCamera(
