@@ -52,10 +52,20 @@ window.addEventListener('resize', () => {
 })
 
 window.addEventListener('dblclick', () => {
-  if (!document.fullscreenElement) {
-    canvas.requestFullscreen()
+  const fullscreen =
+    document.fullscreenElement || document.webkitFullscreenElement
+  if (!fullscreen) {
+    if (canvas.requestFullscreen) {
+      canvas.requestFullscreen()
+    } else if (canvas.webkitRequestFullscreen) {
+      canvas.webkitRequestFullscreen()
+    }
   } else {
-    document.exitFullscreen()
+    if (document.fullscreenElement) {
+      document.exitFullscreen()
+    } else {
+      document.webkitExitFullscreen()
+    }
   }
 })
 
