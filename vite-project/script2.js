@@ -3,6 +3,8 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls'
+import { TextGeometry } from 'three/addons/geometries/TextGeometry.js'
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
 
 const canvas = document.querySelector('canvas.webgl')
 
@@ -20,15 +22,55 @@ window.addEventListener('mousemove', (e) => {
 const scene = new THREE.Scene()
 
 //* Object
-const geometry = new THREE.BoxGeometry(1, 1, 1)
+// const geometry = new THREE.BoxGeometry(1, 1, 1)
+// const geometry = new THREE.TorusGeometry(2.5, 1, 16, 100)
+const geometry = new THREE.TorusKnotGeometry(4, 1, 300, 16)
+
 const material = new THREE.MeshBasicMaterial({
-  color: 'red',
+  color: 'purple',
   wireframe: true,
 })
 
 const cube = new THREE.Mesh(geometry, material)
 
 scene.add(cube)
+
+// const fontLoader = new FontLoader()
+// fontLoader.load(
+//   'https://threejs.org/examples/fonts/helvetiker_regular.typeface.json',
+//   (font) => {
+//     const textGeometry = new TextGeometry('I Love you Alaa <3', {
+//       font: font,
+//       size: 1,
+//       height: 0.2,
+//       curveSegments: 12,
+//       bevelEnabled: true,
+//       bevelThickness: 0.03,
+//       bevelSize: 0.02,
+//       bevelSegments: 5,
+//     })
+
+//     const textMaterial = new THREE.MeshBasicMaterial({
+//       color: 'purple',
+//       // wireframe: true,
+//     })
+//     const textMesh = new THREE.Mesh(textGeometry, textMaterial)
+//     scene.add(textMesh)
+//     camera.lookAt(textMesh.position)
+
+//     // Position the camera
+//     camera.position.z = 5
+
+//     // Animation loop
+//     // const animate = () => {
+//     //   requestAnimationFrame(animate)
+//     //   textMesh.rotation.x += 0.01
+//     //   textMesh.rotation.y += 0.01
+//     //   renderer.render(scene, camera)
+//     // }
+//     // animate()
+//   }
+// )
 
 //* Camera
 const sizes = {
@@ -87,7 +129,7 @@ const camera = new THREE.PerspectiveCamera(
 //   1000
 // )
 
-camera.position.z = 5
+camera.position.z = 15
 camera.lookAt(cube.position)
 scene.add(camera)
 
