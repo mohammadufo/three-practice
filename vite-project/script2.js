@@ -51,6 +51,14 @@ window.addEventListener('resize', () => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
 
+window.addEventListener('dblclick', () => {
+  if (!document.fullscreenElement) {
+    canvas.requestFullscreen()
+  } else {
+    document.exitFullscreen()
+  }
+})
+
 const aspectRatio = sizes.width / sizes.height
 
 const camera = new THREE.PerspectiveCamera(
@@ -87,6 +95,7 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.render(scene, camera)
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 const clock = new THREE.Clock()
 
