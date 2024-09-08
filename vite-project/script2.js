@@ -48,6 +48,7 @@ window.addEventListener('resize', () => {
 
   //! update Renderer sizes
   renderer.setSize(sizes.width, sizes.height)
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
 
 const aspectRatio = sizes.width / sizes.height
