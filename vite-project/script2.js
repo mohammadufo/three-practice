@@ -26,9 +26,15 @@ const scene = new THREE.Scene()
 // const geometry = new THREE.TorusGeometry(2.5, 1, 16, 100)
 // const geometry = new THREE.TorusKnotGeometry(4, 1, 300, 16)
 
-const positionsArray = new Float32Array([0, 0, 0, 0, 1, 0, 1, 0, 0])
-const positionsAttribute = new THREE.BufferAttribute(positionsArray, 3)
 const geometry = new THREE.BufferGeometry()
+const count = 500
+const positionsArray = new Float32Array(count * 30 * 30)
+
+for (let i = 0; i < count * 3 * 3; i++) {
+  positionsArray[i] = (Math.random() - 0.5) * 4
+}
+
+const positionsAttribute = new THREE.BufferAttribute(positionsArray, 3)
 geometry.setAttribute('position', positionsAttribute)
 
 // positionsArray[0] = 0
@@ -146,7 +152,7 @@ const camera = new THREE.PerspectiveCamera(
 //   1000
 // )
 
-camera.position.z = 15
+camera.position.z = 7
 camera.lookAt(cube.position)
 scene.add(camera)
 
