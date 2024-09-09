@@ -2,6 +2,10 @@ import './style.css'
 
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import GUI from 'lil-gui'
+
+//* Debug
+const gui = new GUI()
 
 const canvas = document.querySelector('canvas.webgl')
 // * Curser
@@ -24,8 +28,14 @@ const material = new THREE.MeshBasicMaterial({
   wireframe: true,
 })
 
-const cube = new THREE.Mesh(geometry, material)
-scene.add(cube)
+const mesh = new THREE.Mesh(geometry, material)
+scene.add(mesh)
+
+gui.add(mesh.position, 'y').min(-3).max(3).step(0.01).name('elevations')
+
+gui.add(mesh, 'visible')
+
+gui.add(material, 'wireframe')
 
 //* Camera
 const sizes = {
@@ -80,7 +90,7 @@ const axesHelper = new THREE.AxesHelper(3)
 scene.add(axesHelper)
 
 camera.position.z = 4
-camera.lookAt(cube.position)
+camera.lookAt(mesh.position)
 scene.add(camera)
 
 //* Controls
@@ -103,7 +113,7 @@ const tick = () => {
   //   camera.position.x = Math.sin(curser.x * Math.PI * 2) * 2
   //   camera.position.z = Math.cos(curser.x * Math.PI * 2) * 2
   //   camera.position.y = curser.y * 3
-  //   camera.lookAt(cube.position)
+  //   camera.lookAt(mesh.position)
 
   //? Update Controls
   controls.update()
