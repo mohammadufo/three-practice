@@ -2,12 +2,8 @@ import './style.css'
 
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls'
-import { TextGeometry } from 'three/addons/geometries/TextGeometry.js'
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
 
 const canvas = document.querySelector('canvas.webgl')
-
 // * Curser
 const curser = {
   x: 0,
@@ -23,77 +19,13 @@ const scene = new THREE.Scene()
 
 //* Object
 const geometry = new THREE.BoxGeometry(1, 1, 1)
-// const geometry = new THREE.TorusGeometry(2.5, 1, 16, 100)
-// const geometry = new THREE.TorusKnotGeometry(4, 1, 300, 16)
-
-// const geometry = new THREE.BufferGeometry()
-// const count = 500
-// const positionsArray = new Float32Array(count * 30 * 30)
-
-// for (let i = 0; i < count * 3 * 3; i++) {
-//   positionsArray[i] = (Math.random() - 0.5) * 4
-// }
-
-// const positionsAttribute = new THREE.BufferAttribute(positionsArray, 3)
-// geometry.setAttribute('position', positionsAttribute)
-
-// positionsArray[0] = 0
-// positionsArray[1] = 0
-// positionsArray[2] = 0
-
-// positionsArray[3] = 0
-// positionsArray[4] = 1
-// positionsArray[5] = 0
-
-// positionsArray[6] = 1
-// positionsArray[7] = 0
-// positionsArray[8] = 0
-
 const material = new THREE.MeshBasicMaterial({
   color: 'purple',
   wireframe: true,
 })
 
 const cube = new THREE.Mesh(geometry, material)
-
 scene.add(cube)
-
-// const fontLoader = new FontLoader()
-// fontLoader.load(
-//   'https://threejs.org/examples/fonts/helvetiker_regular.typeface.json',
-//   (font) => {
-//     const textGeometry = new TextGeometry('I Love you Alaa <3', {
-//       font: font,
-//       size: 1,
-//       height: 0.2,
-//       curveSegments: 12,
-//       bevelEnabled: true,
-//       bevelThickness: 0.03,
-//       bevelSize: 0.02,
-//       bevelSegments: 5,
-//     })
-
-//     const textMaterial = new THREE.MeshBasicMaterial({
-//       color: 'purple',
-//       // wireframe: true,
-//     })
-//     const textMesh = new THREE.Mesh(textGeometry, textMaterial)
-//     scene.add(textMesh)
-//     camera.lookAt(textMesh.position)
-
-//     // Position the camera
-//     camera.position.z = 5
-
-//     // Animation loop
-//     // const animate = () => {
-//     //   requestAnimationFrame(animate)
-//     //   textMesh.rotation.x += 0.01
-//     //   textMesh.rotation.y += 0.01
-//     //   renderer.render(scene, camera)
-//     // }
-//     // animate()
-//   }
-// )
 
 //* Camera
 const sizes = {
@@ -143,25 +75,16 @@ const camera = new THREE.PerspectiveCamera(
   100
 )
 
-// const camera = new THREE.OrthographicCamera(
-//   -1 * aspectRatio,
-//   1 * aspectRatio,
-//   1,
-//   -1,
-//   0.1,
-//   1000
-// )
+//* Helper
+const axesHelper = new THREE.AxesHelper(3)
+scene.add(axesHelper)
 
-camera.position.z = 3
+camera.position.z = 4
 camera.lookAt(cube.position)
 scene.add(camera)
 
-//* Helper
-const axesHelper = new THREE.AxesHelper(3)
-// scene.add(axesHelper)
-
 //* Controls
-const controls = new TrackballControls(camera, canvas)
+const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
 
 //* Renderer
