@@ -6,6 +6,7 @@ import GUI from 'lil-gui'
 
 //* Debug
 const gui = new GUI()
+const debugObj = {}
 
 const canvas = document.querySelector('canvas.webgl')
 // * Curser
@@ -22,9 +23,10 @@ window.addEventListener('mousemove', (e) => {
 const scene = new THREE.Scene()
 
 //* Object
+debugObj.color = '#3a6ea6'
 const geometry = new THREE.BoxGeometry(1, 1, 1)
 const material = new THREE.MeshBasicMaterial({
-  color: 'purple',
+  color: debugObj.color,
   wireframe: true,
 })
 
@@ -36,6 +38,10 @@ gui.add(mesh.position, 'y').min(-3).max(3).step(0.01).name('elevations')
 gui.add(mesh, 'visible')
 
 gui.add(material, 'wireframe')
+
+gui.addColor(debugObj, 'color').onChange((value) => {
+  material.color.set(debugObj.color)
+})
 
 //* Camera
 const sizes = {
