@@ -47,6 +47,12 @@ debugObj.spin = () => {
 
 gui.add(debugObj, 'spin')
 
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'h') {
+    gui.show(gui._hidden)
+  }
+})
+
 debugObj.subdivision = 2
 gui
   .add(debugObj, 'subdivision')
