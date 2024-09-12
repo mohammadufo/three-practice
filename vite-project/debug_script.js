@@ -4,6 +4,16 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import GUI from 'lil-gui'
 import { gsap } from 'gsap'
+import Color from './static/textures/door/color.jpg'
+
+//* Textures
+const image = new Image()
+const texture = new THREE.Texture(image)
+
+image.onload = () => {
+  texture.needsUpdate = true
+}
+image.src = './static/textures/door/color.jpg'
 
 //* Debug
 const gui = new GUI()
@@ -27,8 +37,9 @@ const scene = new THREE.Scene()
 debugObj.color = '#a778d8'
 const geometry = new THREE.BoxGeometry(1, 1, 1)
 const material = new THREE.MeshBasicMaterial({
-  color: debugObj.color,
-  wireframe: true,
+  // color: debugObj.color,
+  map: texture,
+  // wireframe: true,
 })
 
 const mesh = new THREE.Mesh(geometry, material)
@@ -121,7 +132,7 @@ const camera = new THREE.PerspectiveCamera(
 
 //* Helper
 const axesHelper = new THREE.AxesHelper(3)
-scene.add(axesHelper)
+// scene.add(axesHelper)
 
 camera.position.z = 4
 camera.lookAt(mesh.position)
