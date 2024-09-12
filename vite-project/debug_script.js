@@ -3,6 +3,7 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import GUI from 'lil-gui'
+import { gsap } from 'gsap'
 
 //* Debug
 const gui = new GUI()
@@ -23,7 +24,7 @@ window.addEventListener('mousemove', (e) => {
 const scene = new THREE.Scene()
 
 //* Object
-debugObj.color = '#3a6ea6'
+debugObj.color = '#a778d8'
 const geometry = new THREE.BoxGeometry(1, 1, 1)
 const material = new THREE.MeshBasicMaterial({
   color: debugObj.color,
@@ -32,16 +33,37 @@ const material = new THREE.MeshBasicMaterial({
 
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
-
 gui.add(mesh.position, 'y').min(-3).max(3).step(0.01).name('elevations')
-
 gui.add(mesh, 'visible')
-
 gui.add(material, 'wireframe')
 
-gui.addColor(debugObj, 'color').onChange((value) => {
+gui.addColor(debugObj, 'color').onChange(() => {
   material.color.set(debugObj.color)
 })
+
+debugObj.spin = () => {
+  gsap.to(mesh.rotation, { duration: 3, y: mesh.rotation.y + Math.PI * 2 })
+}
+
+gui.add(debugObj, 'spin')
+
+debugObj.subdivision = 2
+gui
+  .add(debugObj, 'subdivision')
+  .min(1)
+  .max(20)
+  .step(1)
+  .onFinishChange(() => {
+    mesh.geometry.dispose()
+    mesh.geometry = new THREE.BoxGeometry(
+      1,
+      1,
+      1,
+      debugObj.subdivision,
+      debugObj.subdivision,
+      debugObj.subdivision
+    )
+  })
 
 //* Camera
 const sizes = {
