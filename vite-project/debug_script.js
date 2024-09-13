@@ -26,13 +26,31 @@ loadingManager.onError = () => {
 }
 
 const textureLoader = new THREE.TextureLoader(loadingManager)
+const colorTexture2 = textureLoader.load(
+  './static/textures/checkerboard-1024x1024.png'
+)
+
+const minecraftTexture = textureLoader.load('./static/textures/minecraft.png')
+
 const colorTexture = textureLoader.load('./static/textures/door/color.jpg')
 
-colorTexture.repeat.x = 2
-colorTexture.repeat.y = 3
+// colorTexture.repeat.x = 2
+// colorTexture.repeat.y = 3
 
-colorTexture.wrapS = THREE.RepeatWrapping
-colorTexture.wrapT = THREE.RepeatWrapping
+// colorTexture.wrapS = THREE.RepeatWrapping
+// colorTexture.wrapT = THREE.RepeatWrapping
+
+// colorTexture.offset.x = 0.5
+// colorTexture.offset.y = 0.5
+
+// colorTexture.rotation = Math.PI * 0.25
+
+// colorTexture.center.x = 0.5
+// colorTexture.center.y = 0.5
+
+minecraftTexture.generateMipmaps = false
+// colorTexture.minFilter = THREE.NearestFilter
+minecraftTexture.magFilter = THREE.NearestFilter
 
 //* Debug
 const gui = new GUI()
@@ -57,7 +75,7 @@ debugObj.color = '#a778d8'
 const geometry = new THREE.BoxGeometry(1, 1, 1)
 const material = new THREE.MeshBasicMaterial({
   // color: debugObj.color,
-  map: colorTexture,
+  map: minecraftTexture,
   // wireframe: true,
 })
 
