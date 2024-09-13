@@ -34,15 +34,21 @@ doorColorTexture.colorSpace = THREE.SRGBColorSpace
 matcapTexture.colorSpace = THREE.SRGBColorSpace
 
 //! Objects
-const material = new THREE.MeshBasicMaterial({
-  map: doorColorTexture,
-  // color: 'red',
-  // wireframe: true,
-  transparent: true,
-  // opacity: 0.2,
-})
-// material.alphaMap = doorAlphaTexture
-material.side = THREE.DoubleSide
+//* MeshBasicMaterial
+// const material = new THREE.MeshBasicMaterial({
+//   map: doorColorTexture,
+//   // color: 'red',
+//   // wireframe: true,
+//   transparent: true,
+//   // opacity: 0.2,
+// })
+// // material.alphaMap = doorAlphaTexture
+// material.side = THREE.DoubleSide
+
+//* MeshNormalMaterial
+const material = new THREE.MeshNormalMaterial()
+// material.wireframe = true
+material.flatShading = true
 
 const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 16), material)
 sphere.position.x = -1.5
