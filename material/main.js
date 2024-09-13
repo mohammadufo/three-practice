@@ -54,7 +54,21 @@ matcapTexture.colorSpace = THREE.SRGBColorSpace
 // const material = new THREE.MeshMatcapMaterial()
 // material.matcap = matcapTexture
 
-const material = new THREE.MeshLambertMaterial()
+//* MeshLambertMaterial
+// const material = new THREE.MeshLambertMaterial()
+
+//* MeshPhongMaterial
+// const material = new THREE.MeshPhongMaterial()
+// // material.shininess = 100
+// material.specular = new THREE.Color(0x1188ff)
+
+//* MeshToonMaterial
+// const material = new THREE.MeshToonMaterial()
+
+// //* MeshToonMaterial
+const material = new THREE.MeshStandardMaterial()
+material.metalness = 0.45
+material.roughness = 0.65
 
 const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 16), material)
 sphere.position.x = -1.5
