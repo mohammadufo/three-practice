@@ -11,9 +11,38 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
-//* Objects
+//! Textures
+const textureLoader = new THREE.TextureLoader()
 
-const material = new THREE.MeshBasicMaterial({ color: 'teal', wireframe: true })
+const doorColorTexture = textureLoader.load('/static/textures/door/color.jpg')
+const doorAlphaTexture = textureLoader.load('/static/textures/door/alpha.jpg')
+const doorAmbientOcclusionTexture = textureLoader.load(
+  '/static/textures/door/ambientOcclusion.jpg'
+)
+const doorHeightTexture = textureLoader.load('/static/textures/door/height.jpg')
+const doorNormalTexture = textureLoader.load('/static/textures/door/normal.jpg')
+const doorMetalnessTexture = textureLoader.load(
+  '/static/textures/door/metalness.jpg'
+)
+const doorRoughnessTexture = textureLoader.load(
+  '/static/textures/door/roughness.jpg'
+)
+const matcapTexture = textureLoader.load('/static/textures/matcaps/1.png')
+const gradientTexture = textureLoader.load('/static/textures/gradients/3.jpg')
+
+doorColorTexture.colorSpace = THREE.SRGBColorSpace
+matcapTexture.colorSpace = THREE.SRGBColorSpace
+
+//! Objects
+const material = new THREE.MeshBasicMaterial({
+  map: doorColorTexture,
+  // color: 'red',
+  // wireframe: true,
+  transparent: true,
+  // opacity: 0.2,
+})
+// material.alphaMap = doorAlphaTexture
+material.side = THREE.DoubleSide
 
 const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 16), material)
 sphere.position.x = -1.5
