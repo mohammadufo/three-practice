@@ -7,13 +7,32 @@ import { gsap } from 'gsap'
 import Color from './static/textures/door/color.jpg'
 
 //* Textures
-const image = new Image()
-const texture = new THREE.Texture(image)
+const loadingManager = new THREE.LoadingManager()
 
-image.onload = () => {
-  texture.needsUpdate = true
+loadingManager.onStart = () => {
+  console.log('loading started')
 }
-image.src = './static/textures/door/color.jpg'
+
+loadingManager.onLoad = () => {
+  console.log('loading finished')
+}
+
+loadingManager.onProgress = () => {
+  console.log('loading on progress')
+}
+
+loadingManager.onError = () => {
+  console.log('loading is error')
+}
+
+const textureLoader = new THREE.TextureLoader(loadingManager)
+const colorTexture = textureLoader.load('./static/textures/door/color.jpg')
+
+colorTexture.repeat.x = 2
+colorTexture.repeat.y = 3
+
+colorTexture.wrapS = THREE.RepeatWrapping
+colorTexture.wrapT = THREE.RepeatWrapping
 
 //* Debug
 const gui = new GUI()
@@ -38,7 +57,7 @@ debugObj.color = '#a778d8'
 const geometry = new THREE.BoxGeometry(1, 1, 1)
 const material = new THREE.MeshBasicMaterial({
   // color: debugObj.color,
-  map: texture,
+  map: colorTexture,
   // wireframe: true,
 })
 
