@@ -1,10 +1,16 @@
 import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import GUI from 'lil-gui'
+import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
 
 /**
  * Base
  */
+
+//! Debug
+const gui = new GUI()
+
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
@@ -67,8 +73,11 @@ matcapTexture.colorSpace = THREE.SRGBColorSpace
 
 // //* MeshToonMaterial
 const material = new THREE.MeshStandardMaterial()
-material.metalness = 0.45
-material.roughness = 0.65
+material.metalness = 1
+material.roughness = 0
+
+gui.add(material, 'metalness').min(0).max(1).step(0.0001)
+gui.add(material, 'roughness').min(0).max(1).step(0.0001)
 
 const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 16), material)
 sphere.position.x = -1.5
@@ -83,13 +92,23 @@ torus.position.x = 1.5
 
 scene.add(sphere, plane, torus)
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 1)
-scene.add(ambientLight)
-const pointLight = new THREE.PointLight(0xffffff, 30)
-pointLight.position.x = 2
-pointLight.position.y = 3
-pointLight.position.z = 4
-scene.add(pointLight)
+//! Lights
+// const ambientLight = new THREE.AmbientLight(0xffffff, 1)
+// scene.add(ambientLight)
+// const pointLight = new THREE.PointLight(0xffffff, 30)
+// pointLight.position.x = 2
+// pointLight.position.y = 3
+// pointLight.position.z = 4
+// scene.add(pointLight)
+
+//! Environment map
+const rgbeLoader = new RGBELoader()
+rgbeLoader.load('/static/textures/environmentMap/2k.hdr', (envMap) => {
+  envMap.mapping = THREE.EquirectangularRefractionMapping
+  scene.background = envMap
+  scene.environment = envMap
+})
+
 /**
  * Sizes
  */
