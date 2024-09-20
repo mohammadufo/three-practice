@@ -15,17 +15,37 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
+const helper = new THREE.AxesHelper()
+scene.add(helper)
+
 /**
  * Lights
  */
-const ambientLight = new THREE.AmbientLight(0xffffff, 1.5)
-scene.add(ambientLight)
 
-const pointLight = new THREE.PointLight(0xffffff, 50)
-pointLight.position.x = 2
-pointLight.position.y = 3
-pointLight.position.z = 4
+const ambientLight = new THREE.AmbientLight('gray', 0.5)
+// scene.add(ambientLight)
+
+const directionalLight = new THREE.DirectionalLight('red', 0.4)
+directionalLight.position.set(1, 0.75, 0)
+// scene.add(directionalLight)
+
+const hemisphereLight = new THREE.HemisphereLight('teal', 'blue', 0.3)
+// scene.add(hemisphereLight)
+
+const pointLight = new THREE.PointLight('purple', 0.7)
+pointLight.position.set(1, -0.5, 1)
 scene.add(pointLight)
+const pointLightHelper = new THREE.PointLightHelper(pointLight, 0.2)
+scene.add(pointLightHelper)
+
+const rectAreaLight = new THREE.RectAreaLight(0x4e00ff, 2, 1.2, 4)
+rectAreaLight.position.z = 2
+rectAreaLight.position.y = 2
+// scene.add(rectAreaLight)
+
+const spotLight = new THREE.SpotLight(0x78ff00, 0.5, 10, Math.PI * 0.1, 0.25, 1)
+spotLight.position.set(1, 1, 7)
+scene.add(spotLight)
 
 /**
  * Objects
