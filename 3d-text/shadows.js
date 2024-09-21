@@ -34,9 +34,10 @@ scene.add(directionalLight)
 
 directionalLight.castShadow = true
 
-// directionalLight.shadow.mapSize.width = 1024 * 2
-// directionalLight.shadow.mapSize.height = 1024 * 2
+directionalLight.shadow.mapSize.width = 1024
+directionalLight.shadow.mapSize.height = 1024
 directionalLight.shadow.camera.far = 6
+directionalLight.shadow.radius = 10
 
 const directionalLightCameraHelper = new THREE.CameraHelper(
   directionalLight.shadow.camera
