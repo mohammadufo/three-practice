@@ -15,6 +15,15 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
+// Textures
+const textureLoader = new THREE.TextureLoader()
+const bakedShadow = textureLoader.load(
+  '/static/textures/shadows/bakedShadow.jpg'
+)
+const simpleShadow = textureLoader.load(
+  '/static/textures/shadows/simpleShadow.jpg'
+)
+
 /**
  * Lights
  */
@@ -68,12 +77,22 @@ gui.add(material, 'roughness').min(0).max(1).step(0.001)
 const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.5, 32, 32), material)
 sphere.castShadow = true
 
-const plane = new THREE.Mesh(new THREE.PlaneGeometry(5, 5), material)
+const plane = new THREE.Mesh(
+  new THREE.PlaneGeometry(5, 5),
+  material
+  // new THREE.MeshBasicMaterial({
+  //   map: bakedShadow,
+  // })
+)
 plane.rotation.x = -Math.PI * 0.5
 plane.position.y = -0.5
 plane.receiveShadow = true
 
 scene.add(sphere, plane)
+
+// const sphereShadow = new THREE.Mesh(
+//   new THREE.PlaneBugg
+// )
 
 /**
  * Sizes
@@ -134,6 +153,10 @@ const clock = new THREE.Clock()
 
 const tick = () => {
   const elapsedTime = clock.getElapsedTime()
+
+  sphere.position.x = Math.cos(elapsedTime) * 2
+  sphere.position.z = Math.sin(elapsedTime) * 2
+  sphere.position.y = Math.abs(Math.sin(elapsedTime * 3))
 
   // Update controls
   controls.update()
